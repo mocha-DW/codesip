@@ -1,0 +1,932 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>codeSip - Custom Software Solutions</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    
+    .serif-font {
+      font-family: 'Playfair Display', serif;
+    }
+    
+    .sans-font {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .smooth-scroll {
+      scroll-behavior: smooth;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    .animate-fade-in-up {
+      animation: fadeInUp 0.3s ease-out forwards;
+    }
+    
+    .animate-fade-in {
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+    
+    .delay-1 {
+      animation-delay: 0.05s;
+      opacity: 0;
+    }
+    
+    .delay-2 {
+      animation-delay: 0.1s;
+      opacity: 0;
+    }
+    
+    .delay-3 {
+      animation-delay: 0.15s;
+      opacity: 0;
+    }
+    
+    .delay-4 {
+      animation-delay: 0.2s;
+      opacity: 0;
+    }
+    
+    .delay-5 {
+      animation-delay: 0.25s;
+      opacity: 0;
+    }
+    
+    .hover-lift {
+      transition: all 0.3s ease;
+    }
+    
+    .hover-lift:hover {
+      transform: translateY(-8px);
+    }
+    
+    .image-grid-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    
+    .image-grid-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+    }
+    
+    .image-grid-item:hover::before {
+      opacity: 1;
+    }
+    
+    .image-grid-item img {
+      transition: transform 0.4s ease;
+    }
+    
+    .image-grid-item:hover img {
+      transform: scale(1.05);
+    }
+    
+    .service-card {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      transition: width 0.3s ease;
+    }
+    
+    .service-card:hover::after {
+      width: 100%;
+    }
+    
+    .nav-link {
+      position: relative;
+      padding: 0.5rem 0;
+      transition: opacity 0.2s ease;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 1px;
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .btn-primary {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      z-index: 1;
+    }
+    
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: -1;
+    }
+    
+    .btn-primary:hover::before {
+      transform: translateX(0);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+    
+    .split-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    
+    @media (max-width: 768px) {
+      .split-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px);
+      transition: all 0.2s ease;
+    }
+    
+    .sticky-nav.scrolled {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+    
+    .masonry-grid {
+      column-count: 3;
+      column-gap: 1.5rem;
+    }
+    
+    @media (max-width: 1024px) {
+      .masonry-grid {
+        column-count: 2;
+      }
+    }
+    
+    @media (max-width: 640px) {
+      .masonry-grid {
+        column-count: 1;
+      }
+    }
+    
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 1.5rem;
+    }
+    
+    .number-large {
+      font-size: 8rem;
+      line-height: 1;
+      font-weight: 300;
+      opacity: 0.1;
+    }
+    
+    @media (max-width: 768px) {
+      .number-large {
+        font-size: 4rem;
+      }
+    }
+    
+    .page {
+      display: none;
+      animation: fadeIn 0.3s ease-out;
+    }
+    
+    .page.active {
+      display: block;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="w-full h-full overflow-auto smooth-scroll"><!-- Navigation -->
+   <nav id="navbar" class="sticky-nav py-6 px-8">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+     <div id="brand-name" class="text-xl font-light tracking-[0.3em] serif-font cursor-pointer" onclick="navigateToPage('home')"></div>
+     <div class="flex gap-10"><a href="#" class="nav-link text-sm tracking-wider uppercase sans-font" onclick="navigateToPage('home'); return false;">Home</a> <a href="#" class="nav-link text-sm tracking-wider uppercase sans-font" onclick="navigateToPage('services'); return false;">Services</a> <a href="#" class="nav-link text-sm tracking-wider uppercase sans-font" onclick="navigateToPage('about'); return false;">About</a> <a href="#" class="nav-link text-sm tracking-wider uppercase sans-font" onclick="navigateToPage('careers'); return false;">Careers</a> <a href="#" class="nav-link text-sm tracking-wider uppercase sans-font" onclick="navigateToPage('contact'); return false;">Contact</a>
+     </div>
+    </div>
+   </nav><!-- HOME PAGE -->
+   <div id="home-page" class="page active"><!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center px-8 py-32">
+     <div class="max-w-7xl mx-auto w-full">
+      <div class="text-center">
+       <div class="mb-8 animate-fade-in-up">
+        <h1 id="hero-title" class="text-7xl md:text-9xl serif-font font-light mb-4 tracking-tight"></h1>
+        <h2 id="hero-subtitle" class="text-4xl md:text-5xl serif-font font-light mb-12 tracking-tight opacity-70"></h2>
+       </div>
+       <p id="hero-description" class="text-lg md:text-xl sans-font font-light tracking-wide mb-12 max-w-2xl mx-auto animate-fade-in-up delay-2"></p><button id="cta-hero-btn" class="btn-primary px-10 py-4 text-sm tracking-widest uppercase sans-font font-medium animate-fade-in-up delay-3"> Explore Services </button>
+      </div>
+     </div>
+    </section><!-- Services Preview -->
+    <section class="py-24 px-8">
+     <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-20">
+       <h2 class="text-5xl md:text-6xl serif-font font-light tracking-tight mb-4">Our Solutions</h2>
+       <p class="text-lg sans-font opacity-60">Cutting-edge technology for modern businesses</p>
+      </div>
+      <div class="masonry-grid">
+       <div class="masonry-item image-grid-item animate-fade-in delay-1" onclick="navigateToPage('services')">
+        <svg viewbox="0 0 400 500" class="w-full"><rect width="400" height="500" id="service-preview-1" /> <rect x="30" y="30" width="340" height="440" fill="white" opacity="0.1" rx="8" /> <circle cx="200" cy="180" r="60" fill="white" opacity="0.15" /> <rect x="80" y="280" width="240" height="30" rx="4" fill="white" opacity="0.1" /> <rect x="100" y="330" width="200" height="20" rx="4" fill="white" opacity="0.08" /> <text x="200" y="450" text-anchor="middle" fill="white" class="sans-font" font-size="24" font-weight="600">
+          Custom Apps
+         </text>
+        </svg>
+       </div>
+       <div class="masonry-item image-grid-item animate-fade-in delay-2" onclick="navigateToPage('services')">
+        <svg viewbox="0 0 400 400" class="w-full"><rect width="400" height="400" id="service-preview-2" /> <rect x="50" y="50" width="300" height="300" fill="white" opacity="0.1" rx="8" /> <circle cx="120" cy="150" r="30" fill="white" opacity="0.15" /> <circle cx="200" cy="150" r="30" fill="white" opacity="0.15" /> <circle cx="280" cy="150" r="30" fill="white" opacity="0.15" /> <rect x="80" y="220" width="240" height="100" rx="4" fill="white" opacity="0.12" /> <text x="200" y="370" text-anchor="middle" fill="white" class="sans-font" font-size="24" font-weight="600">
+          E-Commerce
+         </text>
+        </svg>
+       </div>
+       <div class="masonry-item image-grid-item animate-fade-in delay-3" onclick="navigateToPage('services')">
+        <svg viewbox="0 0 400 550" class="w-full"><rect width="400" height="550" id="service-preview-3" /> <circle cx="200" cy="200" r="100" fill="white" opacity="0.08" /> <circle cx="200" cy="200" r="60" fill="white" opacity="0.12" /> <circle cx="200" cy="200" r="20" fill="white" opacity="0.2" /> <path d="M200 100 L200 140 M300 200 L260 200 M200 300 L200 260 M100 200 L140 200" stroke="white" stroke-width="4" opacity="0.15" /> <text x="200" y="520" text-anchor="middle" fill="white" class="sans-font" font-size="24" font-weight="600">
+          AI Solutions
+         </text>
+        </svg>
+       </div>
+      </div>
+     </div>
+    </section><!-- Stats Section -->
+    <section class="py-24 px-8">
+     <div class="max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-4 gap-8 text-center">
+       <div class="hover-lift p-8">
+        <div class="text-6xl serif-font font-light mb-2">
+         150+
+        </div>
+        <p class="text-sm sans-font opacity-60 tracking-wide uppercase">Projects Delivered</p>
+       </div>
+       <div class="hover-lift p-8">
+        <div class="text-6xl serif-font font-light mb-2">
+         50+
+        </div>
+        <p class="text-sm sans-font opacity-60 tracking-wide uppercase">Happy Clients</p>
+       </div>
+       <div class="hover-lift p-8">
+        <div class="text-6xl serif-font font-light mb-2">
+         25+
+        </div>
+        <p class="text-sm sans-font opacity-60 tracking-wide uppercase">Team Members</p>
+       </div>
+       <div class="hover-lift p-8">
+        <div class="text-6xl serif-font font-light mb-2">
+         98%
+        </div>
+        <p class="text-sm sans-font opacity-60 tracking-wide uppercase">Satisfaction Rate</p>
+       </div>
+      </div>
+     </div>
+    </section>
+   </div><!-- SERVICES PAGE -->
+   <div id="services-page" class="page">
+    <section class="py-24 px-8">
+     <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-20">
+       <h1 class="text-6xl md:text-7xl serif-font font-light tracking-tight mb-6">Our Services</h1>
+       <p class="text-lg sans-font opacity-60 max-w-2xl mx-auto">Comprehensive technology solutions for modern businesses</p>
+      </div>
+      <div class="space-y-0">
+       <div class="service-card py-12 border-t cursor-pointer hover-lift">
+        <div class="flex justify-between items-start gap-8">
+         <div class="flex-1">
+          <div class="flex items-center gap-8 mb-4"><span class="text-6xl serif-font font-light opacity-30">01</span>
+           <h3 id="service-1-title" class="text-3xl md:text-4xl serif-font font-light"></h3>
+          </div>
+          <p id="service-1-desc" class="text-base sans-font opacity-70 ml-32 leading-relaxed max-w-2xl"></p>
+         </div>
+         <div class="text-4xl opacity-40">
+          →
+         </div>
+        </div>
+       </div>
+       <div class="service-card py-12 border-t cursor-pointer hover-lift">
+        <div class="flex justify-between items-start gap-8">
+         <div class="flex-1">
+          <div class="flex items-center gap-8 mb-4"><span class="text-6xl serif-font font-light opacity-30">02</span>
+           <h3 id="service-2-title" class="text-3xl md:text-4xl serif-font font-light"></h3>
+          </div>
+          <p id="service-2-desc" class="text-base sans-font opacity-70 ml-32 leading-relaxed max-w-2xl"></p>
+         </div>
+         <div class="text-4xl opacity-40">
+          →
+         </div>
+        </div>
+       </div>
+       <div class="service-card py-12 border-t border-b cursor-pointer hover-lift">
+        <div class="flex justify-between items-start gap-8">
+         <div class="flex-1">
+          <div class="flex items-center gap-8 mb-4"><span class="text-6xl serif-font font-light opacity-30">03</span>
+           <h3 id="service-3-title" class="text-3xl md:text-4xl serif-font font-light"></h3>
+          </div>
+          <p id="service-3-desc" class="text-base sans-font opacity-70 ml-32 leading-relaxed max-w-2xl"></p>
+         </div>
+         <div class="text-4xl opacity-40">
+          →
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+   </div><!-- ABOUT PAGE -->
+   <div id="about-page" class="page">
+    <section class="py-24 px-8">
+     <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-20">
+       <h1 id="about-page-title" class="text-6xl md:text-7xl serif-font font-light tracking-tight mb-6"></h1>
+       <p id="about-page-description" class="text-lg sans-font opacity-60 max-w-2xl mx-auto leading-relaxed"></p>
+      </div>
+      <div class="split-layout items-center gap-20 mb-32">
+       <div>
+        <svg viewbox="0 0 500 600" class="w-full"><rect width="500" height="600" rx="8" id="about-image" /> <rect x="40" y="40" width="420" height="520" rx="4" fill="white" opacity="0.08" /> <circle cx="250" cy="220" r="90" fill="white" opacity="0.12" /> <ellipse cx="250" cy="450" rx="110" ry="150" fill="white" opacity="0.1" />
+        </svg>
+       </div>
+       <div class="space-y-8">
+        <div class="relative">
+         <div class="number-large serif-font absolute -top-16 -left-8 -z-10">
+          01
+         </div>
+         <h2 id="mission-title" class="text-4xl md:text-5xl serif-font font-light mb-6 tracking-tight"></h2>
+        </div>
+        <p id="mission-text" class="text-lg sans-font font-light leading-relaxed opacity-80"></p>
+       </div>
+      </div><!-- Team Section -->
+      <div class="text-center mb-12">
+       <h2 class="text-5xl serif-font font-light tracking-tight mb-4">Our Team</h2>
+       <p class="text-lg sans-font opacity-60">The experts behind enfraTech</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+       <div class="text-center hover-lift">
+        <svg viewbox="0 0 300 400" class="w-full mb-6"><rect width="300" height="400" rx="8" id="team-1-bg" /> <circle cx="150" cy="120" r="50" fill="white" opacity="0.15" /> <ellipse cx="150" cy="280" rx="80" ry="120" fill="white" opacity="0.12" />
+        </svg>
+        <h3 class="text-2xl serif-font font-light mb-2">Sarah Johnson</h3>
+        <p class="text-sm sans-font opacity-60 tracking-wide uppercase">CEO &amp; Founder</p>
+       </div>
+       <div class="text-center hover-lift">
+        <svg viewbox="0 0 300 400" class="w-full mb-6"><rect width="300" height="400" rx="8" id="team-2-bg" /> <circle cx="150" cy="120" r="50" fill="white" opacity="0.15" /> <ellipse cx="150" cy="280" rx="80" ry="120" fill="white" opacity="0.12" />
+        </svg>
+        <h3 class="text-2xl serif-font font-light mb-2">Michael Chen</h3>
+        <p class="text-sm sans-font opacity-60 tracking-wide uppercase">CTO</p>
+       </div>
+       <div class="text-center hover-lift">
+        <svg viewbox="0 0 300 400" class="w-full mb-6"><rect width="300" height="400" rx="8" id="team-3-bg" /> <circle cx="150" cy="120" r="50" fill="white" opacity="0.15" /> <ellipse cx="150" cy="280" rx="80" ry="120" fill="white" opacity="0.12" />
+        </svg>
+        <h3 class="text-2xl serif-font font-light mb-2">Emily Rodriguez</h3>
+        <p class="text-sm sans-font opacity-60 tracking-wide uppercase">Head of Design</p>
+       </div>
+      </div>
+     </div>
+    </section>
+   </div><!-- CAREERS PAGE -->
+   <div id="careers-page" class="page">
+    <section class="py-24 px-8">
+     <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-20">
+       <h1 id="careers-title" class="text-6xl md:text-7xl serif-font font-light tracking-tight mb-6"></h1>
+       <p id="careers-description" class="text-lg sans-font opacity-60 max-w-2xl mx-auto leading-relaxed"></p>
+      </div><!-- Perks -->
+      <div class="grid md:grid-cols-4 gap-6 mb-20">
+       <div class="text-center p-6 hover-lift" id="perk-1-bg">
+        <div class="text-4xl mb-3">
+         🏖️
+        </div>
+        <h3 class="text-sm sans-font font-medium tracking-wide uppercase mb-1">Flexible Hours</h3>
+        <p class="text-xs sans-font opacity-60">Work-life balance</p>
+       </div>
+       <div class="text-center p-6 hover-lift" id="perk-2-bg">
+        <div class="text-4xl mb-3">
+         💰
+        </div>
+        <h3 class="text-sm sans-font font-medium tracking-wide uppercase mb-1">Competitive Pay</h3>
+        <p class="text-xs sans-font opacity-60">Market-leading</p>
+       </div>
+       <div class="text-center p-6 hover-lift" id="perk-3-bg">
+        <div class="text-4xl mb-3">
+         📚
+        </div>
+        <h3 class="text-sm sans-font font-medium tracking-wide uppercase mb-1">Learning Budget</h3>
+        <p class="text-xs sans-font opacity-60">Continuous growth</p>
+       </div>
+       <div class="text-center p-6 hover-lift" id="perk-4-bg">
+        <div class="text-4xl mb-3">
+         🏥
+        </div>
+        <h3 class="text-sm sans-font font-medium tracking-wide uppercase mb-1">Health Benefits</h3>
+        <p class="text-xs sans-font opacity-60">Full coverage</p>
+       </div>
+      </div><!-- Open Positions -->
+      <div class="space-y-6">
+       <div class="p-8 border hover-lift">
+        <div class="flex flex-col md:flex-row justify-between md:items-start gap-6">
+         <div class="flex-1">
+          <div class="flex items-center gap-3 mb-4">
+           <div class="w-3 h-3 rounded-full" id="status-1"></div>
+           <h3 id="position-1" class="text-3xl serif-font font-light tracking-tight"></h3>
+          </div>
+          <p class="text-base sans-font opacity-70 mb-4 leading-relaxed">Join our team as a developer. We welcome both fresh graduates and experienced professionals.</p>
+          <div class="flex flex-wrap gap-2 mb-4"><span class="px-4 py-1 text-xs sans-font tracking-wide uppercase" id="badge-1-1">Full-time</span> <span class="px-4 py-1 text-xs sans-font tracking-wide uppercase" id="badge-1-2">Remote</span> <span class="px-4 py-1 text-xs sans-font tracking-wide uppercase" id="badge-1-3">All Levels</span>
+          </div>
+         </div><button id="apply-btn-1" class="btn-primary px-8 py-3 text-xs tracking-widest uppercase sans-font font-medium whitespace-nowrap"> Apply Now → </button>
+        </div>
+       </div>
+       <div class="p-8 border hover-lift">
+        <div class="flex flex-col md:flex-row justify-between md:items-start gap-6">
+         <div class="flex-1">
+          <div class="flex items-center gap-3 mb-4">
+           <div class="w-3 h-3 rounded-full" id="status-2"></div>
+           <h3 id="position-2" class="text-3xl serif-font font-light tracking-tight"></h3>
+          </div>
+          <p class="text-base sans-font opacity-70 mb-4 leading-relaxed">Build cutting-edge AI solutions. Open to freshers passionate about machine learning and experienced ML engineers.</p>
+          <div class="flex flex-wrap gap-2 mb-4"><span class="px-4 py-1 text-xs sans-font tracking-wide uppercase" id="badge-2-1">Full-time</span> <span class="px-4 py-1 text-xs sans-font tracking-wide uppercase" id="badge-2-2">Hybrid</span> <span class="px-4 py-1 text-xs sans-font tracking-wide uppercase" id="badge-2-3">All Levels</span>
+          </div>
+         </div><button id="apply-btn-2" class="btn-primary px-8 py-3 text-xs tracking-widest uppercase sans-font font-medium whitespace-nowrap"> Apply Now → </button>
+        </div>
+       </div>
+       <div class="p-8 border hover-lift">
+        <div class="flex flex-col md:flex-row justify-between md:items-start gap-6">
+         <div class="flex-1">
+          <div class="flex items-center gap-3 mb-4">
+           <div class="w-3 h-3 rounded-full" id="status-3"></div>
+           <h3 id="position-3" class="text-3xl serif-font font-light tracking-tight"></h3>
+          </div>
+          <p class="text-base sans-font opacity-70 mb-4 leading-relaxed">Work on complete end-to-end solutions. Welcoming both freshers eager to learn and experienced full-stack developers.</p>
+          <div class="flex flex-wrap gap-2 mb-4"><span class="px-4 py-1 text-xs sans-font tracking-wide uppercase" id="badge-3-1">Full-time</span> <span class="px-4 py-1 text-xs sans-font tracking-wide uppercase" id="badge-3-2">Remote</span> <span class="px-4 py-1 text-xs sans-font tracking-wide uppercase" id="badge-3-3">All Levels</span>
+          </div>
+         </div><button id="apply-btn-3" class="btn-primary px-8 py-3 text-xs tracking-widest uppercase sans-font font-medium whitespace-nowrap"> Apply Now → </button>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+   </div><!-- CONTACT PAGE -->
+   <div id="contact-page" class="page">
+    <section class="py-24 px-8">
+     <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-20">
+       <h1 id="contact-title" class="text-6xl md:text-7xl serif-font font-light tracking-tight mb-6"></h1>
+       <p id="contact-subtitle" class="text-lg sans-font opacity-60 max-w-2xl mx-auto leading-relaxed"></p>
+      </div>
+      <div class="split-layout gap-12">
+       <div>
+        <form id="contact-form" class="space-y-6">
+         <div><label for="name" class="block text-sm sans-font font-medium mb-2 tracking-wide uppercase">Name</label> <input type="text" id="name" name="name" required class="w-full px-4 py-3 border text-base sans-font">
+         </div>
+         <div><label for="email" class="block text-sm sans-font font-medium mb-2 tracking-wide uppercase">Email</label> <input type="email" id="email" name="email" required class="w-full px-4 py-3 border text-base sans-font">
+         </div>
+         <div><label for="company" class="block text-sm sans-font font-medium mb-2 tracking-wide uppercase">Company</label> <input type="text" id="company" name="company" class="w-full px-4 py-3 border text-base sans-font">
+         </div>
+         <div><label for="message" class="block text-sm sans-font font-medium mb-2 tracking-wide uppercase">Message</label> <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 border text-base sans-font"></textarea>
+         </div><button type="submit" id="contact-submit" class="btn-primary w-full py-4 text-xs tracking-widest uppercase sans-font font-medium"> Send Message → </button>
+        </form>
+       </div>
+       <div class="space-y-8">
+        <div>
+         <h3 class="text-3xl serif-font font-light mb-6 tracking-tight">Contact Info</h3>
+         <div class="space-y-4">
+          <div class="flex items-start gap-4">
+           <div class="w-12 h-12 flex items-center justify-center flex-shrink-0" id="contact-icon-1"><span class="text-2xl">📧</span>
+           </div>
+           <div>
+            <h4 class="text-sm sans-font font-medium tracking-wide uppercase mb-1">Email</h4>
+            <p class="text-base sans-font opacity-70">hello@codesip.com</p>
+           </div>
+          </div>
+          <div class="flex items-start gap-4">
+           <div class="w-12 h-12 flex items-center justify-center flex-shrink-0" id="contact-icon-2"><span class="text-2xl">📱</span>
+           </div>
+           <div>
+            <h4 class="text-sm sans-font font-medium tracking-wide uppercase mb-1">Phone</h4>
+            <p class="text-base sans-font opacity-70">+1 (555) 123-4567</p>
+           </div>
+          </div>
+          <div class="flex items-start gap-4">
+           <div class="w-12 h-12 flex items-center justify-center flex-shrink-0" id="contact-icon-3"><span class="text-2xl">📍</span>
+           </div>
+           <div>
+            <h4 class="text-sm sans-font font-medium tracking-wide uppercase mb-1">Office</h4>
+            <p class="text-base sans-font opacity-70">123 Tech Street<br>
+             San Francisco, CA 94105</p>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+   </div><!-- Footer -->
+   <footer id="footer" class="py-16 px-8 border-t">
+    <div class="max-w-7xl mx-auto">
+     <div class="grid md:grid-cols-3 gap-12 mb-12">
+      <div>
+       <div id="footer-brand" class="text-xl font-light tracking-[0.3em] serif-font mb-4"></div>
+       <p class="text-sm sans-font opacity-60 leading-relaxed">Building the future of technology</p>
+      </div>
+      <div>
+       <h4 class="text-xs tracking-widest uppercase sans-font font-medium mb-4 opacity-60">Connect</h4>
+       <div class="space-y-2">
+        <div class="text-sm sans-font opacity-80">
+         LinkedIn
+        </div>
+        <div class="text-sm sans-font opacity-80">
+         Twitter
+        </div>
+        <div class="text-sm sans-font opacity-80">
+         GitHub
+        </div>
+       </div>
+      </div>
+      <div>
+       <h4 class="text-xs tracking-widest uppercase sans-font font-medium mb-4 opacity-60">Contact</h4>
+       <div class="space-y-2">
+        <div class="text-sm sans-font opacity-80">
+         hello@codesip.com
+        </div>
+        <div class="text-sm sans-font opacity-80">
+         +1 (555) 123-4567
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="text-center pt-8 border-t">
+      <p id="footer-text" class="text-sm sans-font opacity-50 tracking-wide"></p>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script>
+    const defaultConfig = {
+      background_color: "#faf9f6",
+      surface_color: "#ffffff",
+      text_color: "#1a1a1a",
+      primary_action_color: "#2d2d2d",
+      secondary_action_color: "#8b7355",
+      font_family: "Playfair Display",
+      font_size: 16,
+      brand_name: "codeSip",
+      hero_title: "codeSip",
+      hero_subtitle: "Building Tomorrow's Technology",
+      hero_description: "Custom software solutions that drive innovation and transform businesses across industries",
+      about_page_title: "Our Story",
+      about_page_description: "Founded in 2020, codeSip has been at the forefront of digital innovation, helping businesses transform their ideas into powerful software solutions.",
+      mission_title: "Our Mission",
+      mission_text: "To empower businesses worldwide with innovative technology solutions that drive growth, efficiency, and success in the digital age.",
+      service_1_title: "Custom App Development",
+      service_1_desc: "Tailored mobile and desktop applications built with cutting-edge technology for your unique business needs",
+      service_2_title: "E-Commerce Solutions",
+      service_2_desc: "Custom websites and online stores designed to maximize your sales and enhance customer experience",
+      service_3_title: "AI & Data Science",
+      service_3_desc: "Intelligent solutions powered by machine learning and data analytics to drive business growth",
+      careers_title: "Join Our Team",
+      careers_description: "We're hiring freshers and experienced professionals who are passionate about technology and innovation",
+      position_1: "Software Developer",
+      position_2: "AI/ML Engineer",
+      position_3: "Full Stack Developer",
+      contact_title: "Get In Touch",
+      contact_subtitle: "Ready to transform your business? Let's discuss how we can help you achieve your goals",
+      footer_text: "© 2024 codeSip. All rights reserved."
+    };
+
+    let currentPage = 'home';
+
+    function navigateToPage(page) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(page + '-page').classList.add('active');
+      currentPage = page;
+      document.getElementById('app').scrollTop = 0;
+    }
+
+    async function onConfigChange(config) {
+      const bgColor = config.background_color || defaultConfig.background_color;
+      const surfaceColor = config.surface_color || defaultConfig.surface_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const primaryColor = config.primary_action_color || defaultConfig.primary_action_color;
+      const secondaryColor = config.secondary_action_color || defaultConfig.secondary_action_color;
+      const fontFamily = config.font_family || defaultConfig.font_family;
+      const fontSize = config.font_size || defaultConfig.font_size;
+
+      document.getElementById('app').style.background = bgColor;
+      document.getElementById('app').style.color = textColor;
+      
+      document.getElementById('navbar').style.background = `${surfaceColor}cc`;
+      
+      const brandName = document.getElementById('brand-name');
+      brandName.textContent = config.brand_name || defaultConfig.brand_name;
+      brandName.style.color = textColor;
+      brandName.style.fontFamily = `${fontFamily}, serif`;
+      brandName.style.fontSize = `${fontSize * 1.25}px`;
+      
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.style.color = textColor;
+        link.style.fontFamily = 'Inter, sans-serif';
+        link.style.fontSize = `${fontSize * 0.875}px`;
+      });
+      
+      document.getElementById('hero').style.background = bgColor;
+      
+      const heroTitle = document.getElementById('hero-title');
+      heroTitle.textContent = config.hero_title || defaultConfig.hero_title;
+      heroTitle.style.color = textColor;
+      heroTitle.style.fontFamily = `${fontFamily}, serif`;
+      heroTitle.style.fontSize = `${fontSize * 5.5}px`;
+      
+      const heroSubtitle = document.getElementById('hero-subtitle');
+      heroSubtitle.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+      heroSubtitle.style.color = textColor;
+      heroSubtitle.style.fontFamily = `${fontFamily}, serif`;
+      heroSubtitle.style.fontSize = `${fontSize * 3}px`;
+      
+      const heroDesc = document.getElementById('hero-description');
+      heroDesc.textContent = config.hero_description || defaultConfig.hero_description;
+      heroDesc.style.color = textColor;
+      heroDesc.style.fontFamily = 'Inter, sans-serif';
+      heroDesc.style.fontSize = `${fontSize * 1.125}px`;
+      
+      const ctaHeroBtn = document.getElementById('cta-hero-btn');
+      ctaHeroBtn.style.background = primaryColor;
+      ctaHeroBtn.style.color = surfaceColor;
+      ctaHeroBtn.style.fontFamily = 'Inter, sans-serif';
+      ctaHeroBtn.style.fontSize = `${fontSize * 0.875}px`;
+      
+      ['service-preview-1', 'service-preview-2', 'service-preview-3'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.fill = secondaryColor;
+      });
+      
+      document.getElementById('service-1-title').textContent = config.service_1_title || defaultConfig.service_1_title;
+      document.getElementById('service-1-desc').textContent = config.service_1_desc || defaultConfig.service_1_desc;
+      document.getElementById('service-2-title').textContent = config.service_2_title || defaultConfig.service_2_title;
+      document.getElementById('service-2-desc').textContent = config.service_2_desc || defaultConfig.service_2_desc;
+      document.getElementById('service-3-title').textContent = config.service_3_title || defaultConfig.service_3_title;
+      document.getElementById('service-3-desc').textContent = config.service_3_desc || defaultConfig.service_3_desc;
+      
+      document.querySelectorAll('.service-card').forEach(card => {
+        card.style.borderColor = `${textColor}20`;
+      });
+      
+      document.getElementById('about-page-title').textContent = config.about_page_title || defaultConfig.about_page_title;
+      document.getElementById('about-page-description').textContent = config.about_page_description || defaultConfig.about_page_description;
+      document.getElementById('mission-title').textContent = config.mission_title || defaultConfig.mission_title;
+      document.getElementById('mission-text').textContent = config.mission_text || defaultConfig.mission_text;
+      
+      document.getElementById('about-image').style.fill = secondaryColor;
+      ['team-1-bg', 'team-2-bg', 'team-3-bg'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.fill = secondaryColor;
+      });
+      
+      document.getElementById('careers-title').textContent = config.careers_title || defaultConfig.careers_title;
+      document.getElementById('careers-description').textContent = config.careers_description || defaultConfig.careers_description;
+      
+      ['perk-1-bg', 'perk-2-bg', 'perk-3-bg', 'perk-4-bg'].forEach(id => {
+        const el = document.getElementById(id);
+        el.style.background = surfaceColor;
+        el.style.color = textColor;
+      });
+      
+      document.getElementById('position-1').textContent = config.position_1 || defaultConfig.position_1;
+      document.getElementById('position-2').textContent = config.position_2 || defaultConfig.position_2;
+      document.getElementById('position-3').textContent = config.position_3 || defaultConfig.position_3;
+      
+      ['status-1', 'status-2', 'status-3'].forEach(id => {
+        const el = document.getElementById(id);
+        el.style.background = secondaryColor;
+      });
+      
+      for (let i = 1; i <= 3; i++) {
+        for (let j = 1; j <= 3; j++) {
+          const badge = document.getElementById(`badge-${i}-${j}`);
+          badge.style.background = `${secondaryColor}20`;
+          badge.style.color = textColor;
+        }
+      }
+      
+      ['apply-btn-1', 'apply-btn-2', 'apply-btn-3'].forEach(id => {
+        const btn = document.getElementById(id);
+        btn.style.background = primaryColor;
+        btn.style.color = surfaceColor;
+      });
+      
+      document.getElementById('contact-title').textContent = config.contact_title || defaultConfig.contact_title;
+      document.getElementById('contact-subtitle').textContent = config.contact_subtitle || defaultConfig.contact_subtitle;
+      
+      document.getElementById('contact-submit').style.background = primaryColor;
+      document.getElementById('contact-submit').style.color = surfaceColor;
+      
+      document.getElementById('footer').style.background = surfaceColor;
+      document.getElementById('footer').style.borderTopColor = `${textColor}10`;
+      
+      const footerBrand = document.getElementById('footer-brand');
+      footerBrand.textContent = config.brand_name || defaultConfig.brand_name;
+      footerBrand.style.color = textColor;
+      
+      document.getElementById('footer-text').textContent = config.footer_text || defaultConfig.footer_text;
+      document.getElementById('footer-text').style.color = textColor;
+      
+      const btnBeforeStyle = document.createElement('style');
+      btnBeforeStyle.textContent = `
+        .btn-primary::before { background: ${secondaryColor}; }
+        .service-card::after { background: ${primaryColor}; }
+        .nav-link::after { background: ${primaryColor}; }
+      `;
+      document.head.appendChild(btnBeforeStyle);
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () => config.surface_color || defaultConfig.surface_color,
+            set: (value) => {
+              config.surface_color = value;
+              window.elementSdk.setConfig({ surface_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              window.elementSdk.setConfig({ text_color: value });
+            }
+          },
+          {
+            get: () => config.primary_action_color || defaultConfig.primary_action_color,
+            set: (value) => {
+              config.primary_action_color = value;
+              window.elementSdk.setConfig({ primary_action_color: value });
+            }
+          },
+          {
+            get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+            set: (value) => {
+              config.secondary_action_color = value;
+              window.elementSdk.setConfig({ secondary_action_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => {
+            config.font_family = value;
+            window.elementSdk.setConfig({ font_family: value });
+          }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (value) => {
+            config.font_size = value;
+            window.elementSdk.setConfig({ font_size: value });
+          }
+        }
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["brand_name", config.brand_name || defaultConfig.brand_name],
+        ["hero_title", config.hero_title || defaultConfig.hero_title],
+        ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+        ["hero_description", config.hero_description || defaultConfig.hero_description],
+        ["about_page_title", config.about_page_title || defaultConfig.about_page_title],
+        ["about_page_description", config.about_page_description || defaultConfig.about_page_description],
+        ["mission_title", config.mission_title || defaultConfig.mission_title],
+        ["mission_text", config.mission_text || defaultConfig.mission_text],
+        ["service_1_title", config.service_1_title || defaultConfig.service_1_title],
+        ["service_1_desc", config.service_1_desc || defaultConfig.service_1_desc],
+        ["service_2_title", config.service_2_title || defaultConfig.service_2_title],
+        ["service_2_desc", config.service_2_desc || defaultConfig.service_2_desc],
+        ["service_3_title", config.service_3_title || defaultConfig.service_3_title],
+        ["service_3_desc", config.service_3_desc || defaultConfig.service_3_desc],
+        ["careers_title", config.careers_title || defaultConfig.careers_title],
+        ["careers_description", config.careers_description || defaultConfig.careers_description],
+        ["position_1", config.position_1 || defaultConfig.position_1],
+        ["position_2", config.position_2 || defaultConfig.position_2],
+        ["position_3", config.position_3 || defaultConfig.position_3],
+        ["contact_title", config.contact_title || defaultConfig.contact_title],
+        ["contact_subtitle", config.contact_subtitle || defaultConfig.contact_subtitle],
+        ["footer_text", config.footer_text || defaultConfig.footer_text]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+
+    onConfigChange(window.elementSdk ? window.elementSdk.config : defaultConfig);
+
+    document.getElementById('cta-hero-btn').addEventListener('click', () => {
+      navigateToPage('services');
+    });
+
+    ['apply-btn-1', 'apply-btn-2', 'apply-btn-3'].forEach(id => {
+      document.getElementById(id).addEventListener('click', function() {
+        const originalText = this.textContent;
+        this.textContent = 'Application Sent ✓';
+        this.style.opacity = '0.7';
+        this.disabled = true;
+        setTimeout(() => {
+          this.textContent = originalText;
+          this.style.opacity = '1';
+          this.disabled = false;
+        }, 2500);
+      });
+    });
+
+    document.getElementById('contact-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('contact-submit');
+      const originalText = btn.textContent;
+      btn.textContent = 'Message Sent ✓';
+      btn.style.opacity = '0.7';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.opacity = '1';
+        btn.disabled = false;
+        document.getElementById('contact-form').reset();
+      }, 2500);
+    });
+
+    const navbar = document.getElementById('navbar');
+    const app = document.getElementById('app');
+    app.addEventListener('scroll', () => {
+      if (app.scrollTop > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9abcaffb36aa3e1c',t:'MTc2NTM2OTEzMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
