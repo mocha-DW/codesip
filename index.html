@@ -407,25 +407,37 @@
 
         <!-- Mission Image (SVG + Image Link) -->
         <div>
-          <svg viewBox="0 0 500 600" class="w-full overflow-hidden rounded-lg">
+    <svg viewBox="0 0 500 600"
+         class="w-full overflow-hidden rounded-lg"
+         xmlns="http://www.w3.org/2000/svg"
+         xmlns:xlink="http://www.w3.org/1999/xlink">
 
-            <!-- Image inside SVG -->
-            <image
-              href="https://media.licdn.com/dms/image/v2/D5622AQEOeKtIzUwlWw/feedshare-shrink_2048_1536/B56ZtkXOAuHkAw-/0/1766915367614?e=1768435200&v=beta&t=bVERmHdZj0d69b4BabKtpFppHtq8z6-y4XpCelw9-pg"
-              width="500"
-              height="600"
-              preserveAspectRatio="xMidYMid slice"
-            />
+      <!-- Image -->
+      <image
+        xlink:href="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
+        width="500"
+        height="600"
+        preserveAspectRatio="xMidYMid slice"
+      />
 
-            <!-- Existing SVG Shapes -->
-                       <rect width="500" height="600" rx="8" id="about-image" />
-            <rect x="40" y="40" width="420" height="520" rx="4"
-                  fill="white" opacity="0.08" />
-            <circle cx="250" cy="220" r="90" fill="white" opacity="0.12" />
-            <ellipse cx="250" cy="450" rx="110" ry="150"
-                     fill="white" opacity="0.1" />
+      <!-- Transparent base rect (IMPORTANT FIX) -->
+      <rect
+        width="500"
+        height="600"
+        rx="8"
+        fill="none"
+        id="about-image"
+      />
 
-          </svg>
+      <!-- Overlay shapes -->
+      <rect x="40" y="40" width="420" height="520" rx="4"
+            fill="white" opacity="0.08" />
+      <circle cx="250" cy="220" r="90"
+              fill="white" opacity="0.12" />
+      <ellipse cx="250" cy="450" rx="110" ry="150"
+               fill="white" opacity="0.1" />
+
+    </svg>
         </div>
 
         <!-- Mission Text -->
